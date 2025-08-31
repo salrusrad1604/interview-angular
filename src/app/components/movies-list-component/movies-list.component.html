@@ -1,0 +1,37 @@
+<div class="general">
+  <div class="header">
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" [formControl]="search" />
+      <button *ngIf="search.value" matSuffix mat-icon-button (click)="search.setValue('')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="actions">
+      <button mat-raised-button (click)="openConfirmDialog()" color="primary">Set all online</button>
+      <button mat-fab color="accent" (click)="openDialogCreate()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="list">
+    <app-card *ngFor="let movie of movies | async; trackBy: trackById" (click)="selectMovie(movie)">
+      <div class="card-header" card-header>{{ movie.name }}</div>
+      <div class="card-body" card-body>
+        Онлайн:
+        <div class="online-check" [ngClass]="{ green: movie.isOnline, red: !movie.isOnline }"></div>
+      </div>
+      <div class="card-actions" card-actions>
+        <button mat-icon-button color="primary" (click)="openDialogUpdateStatus($event, movie)">
+          <mat-icon>update</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="openDialogDelete($event, movie)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </app-card>
+  </div>
+</div>
+<ng-container *ngIf="selectMovie$ | async as selectMovie">
+  <app-movie class="select-container" [movie]="selectMovie" (close)="closeSide()"> </app-movie>
+</ng-container>
