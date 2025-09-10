@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter name</mat-label>
+    <input matInput [formControl]="name" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="accent" (click)="close()">Close</button>
+  <button mat-button color="primary" [mat-dialog-close]="name.value" [disabled]="name.invalid" cdkFocusInitial>Add</button>
+</div>

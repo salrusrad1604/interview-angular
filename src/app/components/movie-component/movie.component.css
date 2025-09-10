@@ -1,0 +1,11 @@
+:host {
+  width: 250px;
+  padding: 40px 8px;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
